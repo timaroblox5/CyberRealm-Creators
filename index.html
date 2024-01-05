@@ -79,16 +79,23 @@
         p {
             text-align: center;
         }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #333;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Welcome to My Social Network</h1>
         <nav>
-            <button onclick="toggleSection('home')">Home</button>
-            <button onclick="toggleSection('chat')">Chat</button>
-            <button onclick="toggleSection('friends')">Friends</button>
-            <button onclick="toggleSection('servers')">Servers</button>
+            <button onclick="navigate('home')">Home</button>
+            <button onclick="navigate('chat')">Chat</button>
+            <button onclick="navigate('friends')">Friends</button>
+            <button onclick="navigate('servers')">Servers</button>
             <button onclick="logout()">Logout</button>
         </nav>
     </header>
@@ -166,6 +173,7 @@
             // Пример успешного входа
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('loggedInPage').style.display = 'block';
+            navigate('home');
         }
 
         function register(event) {
@@ -179,12 +187,14 @@
             // Пример успешной регистрации
             document.getElementById('registrationPage').style.display = 'none';
             document.getElementById('loggedInPage').style.display = 'block';
+            navigate('home');
         }
 
         function logout() {
             // Логика выхода пользователя
             document.getElementById('loggedInPage').style.display = 'none';
             document.getElementById('loginPage').style.display = 'block';
+            navigate('');
         }
 
         function toggleSection(sectionId) {
@@ -203,6 +213,10 @@
                 // Логика создания сервера, например, отправка данных на сервер
                 alert("Server created: " + serverName);
             }
+        }
+
+        function navigate(page) {
+            window.location.href = '/home/' + page + '.html';
         }
     </script>
 </body>
