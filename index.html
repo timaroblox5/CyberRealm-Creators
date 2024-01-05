@@ -38,18 +38,29 @@
 <body>
     <header>
         <h1>Welcome to My Social Network</h1>
+        <nav>
+            <button onclick="toggleSection('home')">Home</button>
+            <button onclick="toggleSection('chat')">Chat</button>
+            <button onclick="toggleSection('friends')">Friends</button>
+            <button onclick="toggleSection('servers')">Servers</button>
+        </nav>
     </header>
+    <section id="home">
+        <h2>Home</h2>
+        <!-- Содержимое раздела "Home" -->
+    </section>
     <section id="chat">
         <h2>Chat Room</h2>
+        <!-- Содержимое раздела "Chat" -->
     </section>
     <section id="friends">
         <h2>Friends List</h2>
+        <!-- Содержимое раздела "Friends" -->
     </section>
-    <section id="groups">
-        <h2>Groups</h2>
-    </section>
-    <section id="profile">
-        <h2>My Profile</h2>
+    <section id="servers">
+        <h2>Servers</h2>
+        <button onclick="createServer()">Create Server</button>
+        <!-- Список серверов пользователя -->
     </section>
     <footer>
         <p>&copy; 2024 My Social Network</p>
@@ -57,11 +68,20 @@
 
     <script>
         function toggleSection(sectionId) {
-            var section = document.getElementById(sectionId);
-            if (section.style.display === 'none' || section.style.display === '') {
-                section.style.display = 'block';
-            } else {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
                 section.style.display = 'none';
+            });
+
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
+        }
+
+        function createServer() {
+            var serverName = prompt("Enter server name:");
+            if (serverName) {
+                // Логика создания сервера, например, отправка данных на сервер
+                alert("Server created: " + serverName);
             }
         }
     </script>
