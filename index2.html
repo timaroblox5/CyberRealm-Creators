@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Social Network</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1em;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 1em;
+        }
+
+        nav button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        #loginPage, #registrationPage, #loggedInPage {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        form label {
+            font-weight: bold;
+        }
+
+        form input {
+            padding: 0.5em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+        }
+
+        p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Social Network</h1>
+        <nav>
+            <button onclick="toggleSection('home')">Home</button>
+            <button onclick="toggleSection('chat')">Chat</button>
+            <button onclick="toggleSection('friends')">Friends</button>
+            <button onclick="toggleSection('servers')">Servers</button>
+            <button onclick="logout()">Logout</button>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Home</h2>
+        <!-- Содержимое раздела "Home" -->
+    </section>
+
+    <section id="chat">
+        <h2>Chat Room</h2>
+        <!-- Содержимое раздела "Chat" -->
+    </section>
+
+    <section id="friends">
+        <h2>Friends List</h2>
+        <!-- Содержимое раздела "Friends" -->
+    </section>
+
+    <section id="servers">
+        <h2>Servers</h2>
+        <button onclick="createServer()">Create Server</button>
+        <!-- Список серверов пользователя -->
+    </section>
+
+    <div id="loginPage">
+        <h2>Login</h2>
+        <form onsubmit="login(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showRegistration()">Register</a></p>
+    </div>
+
+    <div id="registrationPage" style="display: none;">
+        <h2>Registration</h2>
+        <form onsubmit="register(event)">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" required>
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+    </div>
+
+    <div id="loggedInPage" style="display: none;">
+        <footer>
+            <p>&copy; 2024 My Social Network</p>
+        </footer>
+    </div>
+
+    <script>
+        function showRegistration() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('registrationPage').style.display = 'block';
+        }
+
+        function showLogin() {
+            document.getElementById('registrationPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+        }
+
+        function login(event) {
+            event.preventDefault();
+            // Логика проверки логина и пароля на сервере
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Здесь должен быть запрос на сервер для проверки логина и пароля
+
+            // Пример успешного входа
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('loggedInPage').style.display = 'block';
+        }
+
+        function register(event) {
+            event.preventDefault();
+            // Логика регистрации пользователя на сервере
+            var newUsername = document.getElementById('newUsername').value;
+            var newPassword = document.getElementById('newPassword').value;
+
+            // Здесь должен быть запрос на сервер для создания нового пользователя
+
+            // Пример успешной регистрации
+            document.getElementById('registrationPage').style.display = 'none';
+            document.getElementById('loggedInPage').style.display = 'block';
+        }
+
+        function logout() {
+            // Логика выхода пользователя
+            document.getElementById('loggedInPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'block';
+        }
+
+        function toggleSection(sectionId) {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.style.display = 'block';
+        }
+
+        function createServer() {
+            var serverName = prompt("Enter server name:");
+            if (serverName) {
+                // Логика создания сервера, например, отправка данных на сервер
+                alert("Server created: " + serverName);
+            }
+        }
+    </script>
+</body>
+</html>
