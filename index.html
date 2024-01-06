@@ -17,24 +17,47 @@
             color: white;
             padding: 1em;
             text-align: center;
+            position: relative;
         }
 
         nav {
-            display: flex;
-            justify-content: space-around;
-            background-color: #2d2d2d;
-            padding: 1em;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            padding-top: 50px;
+            transition: 0.5s;
         }
 
         nav a {
+            display: block;
+            padding: 15px;
             text-decoration: none;
             color: white;
-            font-weight: bold;
-            transition: color 0.5s;
+            transition: 0.3s;
         }
 
         nav a:hover {
-            color: #4CAF50;
+            background-color: #555;
+        }
+
+        .menu-icon {
+            display: none;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 2;
+        }
+
+        .menu-icon div {
+            width: 35px;
+            height: 5px;
+            background-color: white;
+            margin: 6px 0;
+            transition: 0.4s;
         }
 
         section {
@@ -44,6 +67,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: background-color 0.5s;
+            margin-left: 250px;
         }
 
         section h2 {
@@ -55,36 +79,24 @@
             padding: 1em;
             background-color: #1f1f1f;
             color: white;
-        }
-
-        /* Стиль для кнопки переключения темы */
-        .theme-button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 0.5em 1em;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .theme-button:hover {
-            background-color: #45a049;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="menu-icon" onclick="toggleNav()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <h1>CyberRealm Creators</h1>
         <nav>
-            <a href="#home">Home</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#about">About Us</a>
-            <a href="#contact">Contact</a>
+            <a href="#home" onclick="toggleNav()">Home</a>
+            <a href="#gallery" onclick="toggleNav()">Gallery</a>
+            <a href="#about" onclick="toggleNav()">About Us</a>
+            <a href="#contact" onclick="toggleNav()">Contact</a>
         </nav>
-        <!-- Одна кнопка для переключения темы -->
-        <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
     </header>
 
     <section id="home">
@@ -112,32 +124,12 @@
     </footer>
 
     <script>
-        function toggleTheme() {
-            const body = document.body;
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('nav a');
+        function toggleNav() {
+            const nav = document.querySelector('nav');
+            const section = document.querySelector('section');
 
-            if (body.style.backgroundColor === 'rgb(242, 242, 242)') {
-                // Темная тема
-                body.style.backgroundColor = '#121212';
-                sections.forEach(section => {
-                    section.style.backgroundColor = '#2d2d2d';
-                    section.style.color = '#fff';
-                });
-                navLinks.forEach(link => {
-                    link.style.color = 'white';
-                });
-            } else {
-                // Светлая тема
-                body.style.backgroundColor = '#f2f2f2';
-                sections.forEach(section => {
-                    section.style.backgroundColor = '#fff';
-                    section.style.color = '#333';
-                });
-                navLinks.forEach(link => {
-                    link.style.color = 'black';
-                });
-            }
+            nav.style.left = nav.style.left === '0px' ? '-250px' : '0px';
+            section.style.marginLeft = section.style.marginLeft === '250px' ? '0px' : '250px';
         }
     </script>
 </body>
